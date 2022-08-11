@@ -28,70 +28,103 @@ const router = express.Router();
 
 
 
-router.post('/players',function(req, res){
+// router.post('/players',function(req, res){
 
-    let players =
-    [
-        {
-            "name": "manish",
-            "dob": "1/1/1995",
-            "gender": "male",
-            "city": "jalandhar",
-            "sports": [
-                "swimming"
-            ]
-        },
-        {
+//     let players =
+//     [
+//         {
+//             "name": "manish",
+//             "dob": "1/1/1995",
+//             "gender": "male",
+//             "city": "jalandhar",
+//             "sports": [
+//                 "swimming"
+//             ]
+//         },
+//         {
 
-            "name": "gopal",
-            "dob": "1/09/1995",
-            "gender": "male",
-            "city": "delhi",
-            "sports": [
-                "soccer"
-            ]
-        },
-        {
-            "name": "lokesh",
-            "dob": "1/1/1990",
-            "gender": "male",
-            "city": "mumbai",
-            "sports": [
-                "soccer"
-            ]
-        },
-    ]
+//             "name": "gopal",
+//             "dob": "1/09/1995",
+//             "gender": "male",
+//             "city": "delhi",
+//             "sports": [
+//                 "soccer"
+//             ]
+//         },
+//         {
+//             "name": "lokesh",
+//             "dob": "1/1/1990",
+//             "gender": "male",
+//             "city": "mumbai",
+//             "sports": [
+//                 "soccer"
+//             ]
+//         },
+//     ]
    
-        let newname = req.body.name;
-        let num=0;
-        for(i=0;i<players.length;i++){
-        let hum = players[i];
-        if(hum.name ==newname){
-            let num=1;
-             res.send("This player exist in the list of array")
-        }
-    }
+//         let newname = req.body.name;
+//         let num=0;
+//         for(i=0;i<players.length;i++){
+//         let hum = players[i];
+//         if(hum.name ==newname){
+//             let num=1;
+//              res.send("This player exist in the list of array")
+//         }
+//     }
     
-    if(num==0){
-players.push(req.body)
+//     if(num==0){
+// players.push(req.body)
+//     }
+//     res.send(players)
+
+
+
+
+// });
+
+let persons = [
+    {
+      name : "SK",
+      age : 10,
+      votingStatus : false
+    },
+    {
+      name : "SK",
+      age : 20,
+      votingStatus : false
+    },
+    {
+      name : "AA",
+      age : 70,
+      votingStatus : false
+    },
+    {
+      name : "SC",
+      age : 5,
+      votingStatus : false
+    },
+    {
+      name : "HO",
+      age : 40,
+      votingStatus : false
     }
-    res.send(players)
+  ]
 
 
 
-
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
+  router.post('/eligibleVoter/:age', function(req,res){
+    let eligibleAge = req.params.age;
+     let eligible=[]
+     for(let i=0; i<persons.length; i++){
+        if (persons[i].age>=eligibleAge) {
+            persons[i].votingStatus = true;
+            eligible.push(persons[i]);
+        }
+     }
+    res.send(eligible);
+  })
+  
 module.exports = router;
+
+
+
